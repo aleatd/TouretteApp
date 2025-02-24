@@ -1,8 +1,9 @@
 import SwiftUI
 
-struct HomeView: View {
+struct SettingsView: View {
     var body: some View {
-        Text("View: Home")
+        Text("View: Profile")
             .padding()
     }
 }
+
