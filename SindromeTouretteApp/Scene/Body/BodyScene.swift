@@ -40,7 +40,9 @@ class BodyScene: SKScene {
             
             node.strokeColor = .clear
             
-            node.alpha = 0.5
+            let dot = Dot()
+            dot.name = "dot"
+            node.addChild(dot)
             
             addChild(node)
             
@@ -51,10 +53,19 @@ class BodyScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        let node = self.atPoint(location)
         
+        for node in children {
+            if let dot = node.childNode(withName: "dot") as? Dot {
+                dot.deactivate()
+            }
+        }
+        
+        let node = self.atPoint(location)
         if let name = node.name {
             print("\(name)")
+            if let dot = node.childNode(withName: "dot") as? Dot {
+                dot.activate()
+            }
         }
     }
 }
