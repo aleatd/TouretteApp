@@ -26,24 +26,51 @@ class BodyScene: SKScene {
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         addChild(background)
         
+        let glass = SKImage(systemName: "plus.magnifyingglass", size: CGSize(width: 40, height: 40))
+        glass.position = CGPoint(x: size.width / 2 + 160, y: size.height / 2 + 320)
+        glass.name = "glass"
+        addChild(glass)
+        
+        /*
         let mGlass = SKSpriteNode(imageNamed: "magnPlus")
         mGlass.position = CGPoint(x: size.width / 2 + 140, y: size.height - 60)
         mGlass.size = CGSize(width: 40, height: 40)
         mGlass.name = "mGlass"
-        addChild(mGlass)
+         
+         addChild(mGlass)
 
-        let parts = [
-            ("Head", CGPoint(x: size.width / 2, y: size.height - 135), 96),
-            ("Left Shoulder", CGPoint(x: size.width / 2 - 75, y: size.height / 2 + 90), 36),
-            ("Right Shoulder", CGPoint(x: size.width / 2 + 75, y: size.height / 2 + 90), 36),
-            ("Left Arm", CGPoint(x: size.width / 2 - 100, y: size.height / 2 - 10), 56),
-            ("Right Arm", CGPoint(x: size.width / 2 + 100, y: size.height / 2 - 10), 56),
-            ("Left Hand", CGPoint(x: size.width / 2 - 125, y: size.height / 2 - 115), 36),
-            ("Right Hand", CGPoint(x: size.width / 2 + 125, y: size.height / 2 - 115), 36),
-            ("Left Leg", CGPoint(x: size.width / 2 - 50, y: size.height / 4), 56),
-            ("Right Leg", CGPoint(x: size.width / 2 + 50, y: size.height / 4), 56),
-            ("Left Foot", CGPoint(x: size.width / 2 - 50, y: size.height / 4 - 125), 48),
-            ("Right Foot", CGPoint(x: size.width / 2 + 50, y: size.height / 4 - 125), 48),
+         */
+        
+        
+        let parts = [(
+            "Head",
+            CGPoint(x: size.width / 2, y: size.height - 105), 96
+        ), (
+            "Left Shoulder",
+            CGPoint(x: size.width / 2 - 75, y: size.height / 2 + 90), 36
+        ), (
+            "Right Shoulder",
+            CGPoint(x: size.width / 2 + 75, y: size.height / 2 + 90), 36), (
+                "Left Arm",
+                CGPoint(x: size.width / 2 - 100, y: size.height / 2 - 10), 56
+            ), (
+                "Right Arm", CGPoint(x: size.width / 2 + 100, y: size.height / 2 - 10), 56
+            ), (
+                "Left Hand",
+                CGPoint(x: size.width / 2 - 125, y: size.height / 2 - 115), 36
+            ), (
+                "Right Hand", CGPoint(x: size.width / 2 + 125, y: size.height / 2 - 115), 36
+            ), (
+                "Left Leg",
+                CGPoint(x: size.width / 2 - 50, y: size.height / 4), 56
+            ), (
+                "Right Leg",
+                CGPoint(x: size.width / 2 + 50, y: size.height / 4), 56
+            ), (
+                "Left Foot", CGPoint(x: size.width / 2 - 50, y: size.height / 4 - 125), 48
+            ), (
+                "Right Foot", CGPoint(x: size.width / 2 + 50, y: size.height / 4 - 125), 48
+            ),
         ]
 
         for (name, position, size) in parts {
@@ -73,22 +100,23 @@ class BodyScene: SKScene {
         }
 
         for node in nodes(at: location) {
-            if node.name == "mGlass" {
+            if node.name == "glass" {
                 let pulse = SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.1), SKAction.scale(to: 1, duration: 0.1)])
-                let mGlass = node as! SKSpriteNode
-                mGlass.removeAllActions()
-                mGlass.size = CGSize(width: 40, height: 40)
                 
+                var glass = node as! SKImage
+                glass.removeAllActions()
+                glass.size = CGSize(width: 40, height: 40)
+                                
                 if !isZoomedIn {
-                    mGlass.texture = SKTexture(imageNamed: "magnMinus")
+                    glass.texture = SKTexture(image: UIImage(systemName: "minus.magnifyingglass")!)
                     zoomIn(background, CGPoint(x: size.width / 2 - 190, y: size.height - 255))
                     isZoomedIn = true
                 } else {
-                    mGlass.texture = SKTexture(imageNamed: "magnPlus")
+                    glass.texture = SKTexture(image: UIImage(systemName: "plus.magnifyingglass")!)
                     zoomOut(background)
                     isZoomedIn = false
                 }
-                mGlass.run(pulse)
+                glass.run(pulse)
             } else if partNames.contains(node.name ?? "") {
                 let name = node.name!
                 print("\(name)")
