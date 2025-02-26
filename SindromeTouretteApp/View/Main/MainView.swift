@@ -19,8 +19,9 @@ struct MainView : View {
         VStack {
             Spacer()
             
-            Text("Parte:\(partName)")
+            Text("Part: \(partName)")
                 .padding()
+                .foregroundColor(.black)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .frame(width: 240, height: 50)
@@ -35,7 +36,3 @@ struct MainView : View {
         
     }
 }
-
-
-
-

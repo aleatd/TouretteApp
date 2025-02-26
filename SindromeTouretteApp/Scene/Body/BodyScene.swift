@@ -3,6 +3,7 @@ import SpriteKit
 
 class BodyScene: SKScene {
     var partName : Binding<String>?
+    let partNames = ["Head", "Left Shoulder", "Right Shoulder", "Left Arm", "Right Arm", "Left Hand", "Right Hand", "Left Leg", "Right Leg", "Left Foot", "Right Foot"]
     let background = SKSpriteNode(imageNamed: "Man")
     
     override func didMove(to view: SKView) {
@@ -13,9 +14,8 @@ class BodyScene: SKScene {
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         addChild(background)
         
-        let partNames = ["Head", "Left Shoulder", "Right Shoulder", "Left Arm", "Right Arm", "Left Hand", "Right Hand", "Left Leg", "Right Leg", "Left Foot", "Right Foot"]
         let parts = [
-            ("Head", CGPoint(x: size.width / 2, y: size.height - 125), 96),
+            ("Head", CGPoint(x: size.width / 2, y: size.height - 105), 96),
             
             ("Left Shoulder", CGPoint(x: size.width / 2 - 75, y: size.height / 2 + 90), 36),
             ("Right Shoulder", CGPoint(x: size.width / 2 + 75, y: size.height / 2 + 90), 36),
@@ -40,11 +40,8 @@ class BodyScene: SKScene {
         for (name, position, size) in parts {
             let node = SKShapeNode(circleOfRadius: CGFloat(size))
             node.position = position
-            
             node.name = name
-            
             node.fillColor = .clear
-            
             node.strokeColor = .clear
             
             let dot = Dot()
@@ -64,20 +61,21 @@ class BodyScene: SKScene {
         for node in children {
             if let dot = node.childNode(withName: "dot") as? Dot {
                 dot.deactivate()
+                partName?.wrappedValue = ""
             }
         }
         
         for node in nodes(at: location) {
-            if node.name?.starts(with: "body") == true {
+            if partNames.contains(node.name ?? "") {
                 let name = node.name!
                 print("\(name)")
                 if let dot = node.childNode(withName: "dot") as? Dot {
                     dot.activate()
-                }
-                partName?.wrappedValue = name
-                
-                if name == "Head" {
-                    zoomIn(background,CGPoint(x: node.position.x - 190 , y: node.position.y - 150) )
+                    partName?.wrappedValue = name
+                    
+                    if name == "Head" {
+                        zoomIn(background,CGPoint(x: node.position.x - 190 , y: node.position.y - 150) )
+                    }
                 }
             }
         }
