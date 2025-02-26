@@ -3,7 +3,23 @@ import SwiftUI
 struct ContentView: View {
     @State private var selected = 0
     
+    init() {
+        let appeareance = UITabBarAppearance()
+        appeareance.backgroundColor = .brown
+        appeareance.shadowColor = .white
+        
+        appeareance.stackedLayoutAppearance.normal.iconColor = .white
+        appeareance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        appeareance.stackedLayoutAppearance.selected.iconColor = .black
+        appeareance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.black]
+        
+        UITabBar.appearance().standardAppearance = appeareance
+        UITabBar.appearance().scrollEdgeAppearance = appeareance
+    }
+    
     var body: some View {
+        
         TabView(selection: $selected) {
             DataView()
                 .tabItem {
@@ -13,7 +29,7 @@ struct ContentView: View {
             
             MainView()
                 .tabItem {
-                    Image(systemName: "figure.wave")
+                    Image(systemName: "figure")
                     Text("Main")
                 }
                 .tag(0)
@@ -24,6 +40,10 @@ struct ContentView: View {
                     Text("Settings")
                 }.tag(2)
         }
+        .background(
+            Rectangle().stroke(Color.black, lineWidth: 5)
+        )
+      
     }
 }
 
