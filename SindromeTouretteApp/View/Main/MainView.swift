@@ -15,7 +15,7 @@ struct MainView : View {
     }
     
     var body: some View {
-
+        
         VStack {
             Text("Part: \(partName)")
                 .padding()
@@ -29,7 +29,7 @@ struct MainView : View {
                         .shadow(radius: 5)
                 )
                 .cornerRadius(3)
-                
+            
             
             SpriteView(scene: scene)
         }
