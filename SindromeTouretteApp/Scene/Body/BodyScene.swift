@@ -25,9 +25,15 @@ class BodyScene: SKScene {
         background.size.height = 690.0
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         addChild(background)
+        
+        let mGlass = SKSpriteNode(imageNamed: "magnPlus")
+        mGlass.position = CGPoint(x: size.width / 2 + 140, y: size.height - 60)
+        mGlass.size = CGSize(width: 40, height: 40)
+        mGlass.name = "mGlass"
+        addChild(mGlass)
 
         let parts = [
-            ("Head", CGPoint(x: size.width / 2, y: size.height - 105), 96),
+            ("Head", CGPoint(x: size.width / 2, y: size.height - 135), 96),
             ("Left Shoulder", CGPoint(x: size.width / 2 - 75, y: size.height / 2 + 90), 36),
             ("Right Shoulder", CGPoint(x: size.width / 2 + 75, y: size.height / 2 + 90), 36),
             ("Left Arm", CGPoint(x: size.width / 2 - 100, y: size.height / 2 - 10), 56),
@@ -67,22 +73,28 @@ class BodyScene: SKScene {
         }
 
         for node in nodes(at: location) {
-            if partNames.contains(node.name ?? "") {
+            if node.name == "mGlass" {
+                let pulse = SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.1), SKAction.scale(to: 1, duration: 0.1)])
+                let mGlass = node as! SKSpriteNode
+                mGlass.removeAllActions()
+                mGlass.size = CGSize(width: 40, height: 40)
+                
+                if !isZoomedIn {
+                    mGlass.texture = SKTexture(imageNamed: "magnMinus")
+                    zoomIn(background, CGPoint(x: size.width / 2 - 190, y: size.height - 255))
+                    isZoomedIn = true
+                } else {
+                    mGlass.texture = SKTexture(imageNamed: "magnPlus")
+                    zoomOut(background)
+                    isZoomedIn = false
+                }
+                mGlass.run(pulse)
+            } else if partNames.contains(node.name ?? "") {
                 let name = node.name!
                 print("\(name)")
                 if let dot = node.childNode(withName: "dot") as? Dot {
                     dot.activate()
                     partName?.wrappedValue = name
-
-                    if name == "Head" {
-                        if !isZoomedIn {
-                            zoomIn(background, CGPoint(x: node.position.x - 190, y: node.position.y - 150))
-                            isZoomedIn = true
-                        } else {
-                            zoomOut(background)
-                            isZoomedIn = false
-                        }
-                    }
                 }
             }
         }
