@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SindromeTouretteTemplateApp: App {
+struct SindromeTouretteApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
