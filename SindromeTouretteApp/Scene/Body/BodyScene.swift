@@ -13,6 +13,7 @@ class BodyScene: SKScene {
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         addChild(background)
         
+        let partNames = ["Head", "Left Shoulder", "Right Shoulder", "Left Arm", "Right Arm", "Left Hand", "Right Hand", "Left Leg", "Right Leg", "Left Foot", "Right Foot"]
         let parts = [
             ("Head", CGPoint(x: size.width / 2, y: size.height - 125), 96),
             
@@ -66,35 +67,32 @@ class BodyScene: SKScene {
             }
         }
         
-        let node = self.atPoint(location)
-        if let name = node.name {
-            
-            print("\(name)")
-            if let dot = node.childNode(withName: "dot") as? Dot {
-                dot.activate()
-                
+        for node in nodes(at: location) {
+            if node.name?.starts(with: "body") == true {
+                let name = node.name!
+                print("\(name)")
+                if let dot = node.childNode(withName: "dot") as? Dot {
+                    dot.activate()
+                }
                 partName?.wrappedValue = name
                 
                 if name == "Head" {
                     zoomIn(background,CGPoint(x: node.position.x - 190 , y: node.position.y - 150) )
-                    
                 }
             }
         }
     }
+    
+    func zoomIn(_ node :SKSpriteNode, _ targetCoor : CGPoint) {
+        let targetPosition = node.convert(targetCoor, to: self)
         
-        func zoomIn(_ node :SKSpriteNode, _ targetCoor : CGPoint) {
-            let targetPosition = node.convert(targetCoor, to: self)
-            
-            let dx = (node.position.x - targetPosition.x) * (1.5 - 1)
-            let dy = (node.position.y - targetPosition.y) * (1.5 - 1)
-            
-            let moveAction  = SKAction.move(by: CGVector(dx: dx, dy: dy), duration: 0.5)
-            let scaleAction = SKAction.scale(by: 1.8, duration: 0.5)
-            
-            let group = SKAction.group([moveAction,scaleAction])
-            node.run(group)
-        }
+        let dx = (node.position.x - targetPosition.x) * (1.5 - 1)
+        let dy = (node.position.y - targetPosition.y) * (1.5 - 1)
+        
+        let moveAction  = SKAction.move(by: CGVector(dx: dx, dy: dy), duration: 0.5)
+        let scaleAction = SKAction.scale(by: 1.8, duration: 0.5)
+        
+        let group = SKAction.group([moveAction,scaleAction])
+        node.run(group)
     }
-
-        
+}
