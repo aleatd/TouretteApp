@@ -1,29 +1,55 @@
 import SwiftUI
 
-struct ContentView: View {
-    @State private var selected = 0
+let backgroundColor = Color.sand.opacity(0.95)
+
+enum Tab: String, CaseIterable, Identifiable {
+    case main
+    case data
+    case settings
     
-    var body: some View {
-        TabView(selection: $selected) {
-            DataView()
-                .tabItem {
-                    Image(systemName: "text.page")
-                    Text("Data")
-                }.tag(1)
-            
-            MainView()
-                .tabItem {
-                    Image(systemName: "figure.wave")
-                    Text("Main")
-                }
-                .tag(0)
-            
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }.tag(2)
+    var id: String {
+        rawValue
+    }
+    
+    var icon: String {
+        switch self {
+        case .main: return "person"
+        case .data: return "chart.pie"
+        case .settings: return "gearshape"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .main: return "Main"
+        case .data: return "Data"
+        case .settings: return "Settings"
         }
     }
 }
 
+struct ContentView: View {
+    @State private var selectedTab: Tab = .main
+    
+    var body: some View {
+        ZStack {
+            backgroundColor
+                .ignoresSafeArea()
+            
+            VStack {
+                Group {
+                    switch selectedTab {
+                    case .main:
+                        MainView()
+                    case .data:
+                        DataView()
+                    case .settings:
+                        SettingsView()
+                    }
+                }
+            }
+            
+            BarView(selectedTab: $selectedTab)
+        }
+    }
+}
