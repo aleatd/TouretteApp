@@ -391,7 +391,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SindromeTouretteApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D4733GQ49X;
+				DEVELOPMENT_TEAM = U6ZTHLCYUS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SindromeTouretteApp/Info.plist;
@@ -405,7 +405,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.aleatd;
+				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.giantad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -425,7 +425,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SindromeTouretteApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D4733GQ49X;
+				DEVELOPMENT_TEAM = U6ZTHLCYUS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SindromeTouretteApp/Info.plist;
@@ -439,7 +439,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.aleatd;
+				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.giantad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
