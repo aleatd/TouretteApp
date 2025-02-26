@@ -35,7 +35,7 @@ struct ContentView: View {
         ZStack {
             backgroundColor
                 .ignoresSafeArea()
-
+            
             VStack {
                 Group {
                     switch selectedTab {

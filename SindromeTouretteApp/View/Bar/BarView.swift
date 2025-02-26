@@ -11,7 +11,7 @@ struct BarView: View {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .fill(Color.emerald)
                     .shadow(color: .gray.opacity(0.35), radius: 10, x: 0, y: 5)
-
+                
                 LayoutView(selectedTab: $selectedTab)
             }
             .frame(height: 70)
