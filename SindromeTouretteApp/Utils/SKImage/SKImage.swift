@@ -1,22 +1,30 @@
 import SpriteKit
-import UIKit
 
 class SKImage: SKSpriteNode {
-    init(systemName: String, size: CGSize = CGSize(width: 50, height: 50)) {
-        if let image = UIImage(systemName: systemName) {
-            let texture = SKTexture(image: image)
-            super.init(texture: texture, color: .clear, size: size)
-        } else {
-            super.init(texture: nil, color: .clear, size: size)
-            print("Error: Could not load system image \(systemName)")
-        }
-    }
     
-    func changeImage(to img: String) {
-        texture = SKTexture(image: UIImage(systemName: img) ?? UIImage(systemName: "face.smiling")!)
+    init(image: String, size: CGSize) {
+        let texture = SKImage.createTexture(from: image)
+        super.init(texture: texture, color: .clear, size: size)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func changeImage(to image: String) {
+        let newTexture = SKImage.createTexture(from: image)
+        self.texture = newTexture
+    }
+    
+    private static func createTexture(from source: Any) -> SKTexture {
+        if let name = source as? String {
+            return SKTexture(imageNamed: name)
+        } else if let uiImage = source as? UIImage {
+            return SKTexture(image: uiImage)
+        } else if let texture = source as? SKTexture {
+            return texture
+        } else {
+            return SKTexture()
+        }
     }
 }
