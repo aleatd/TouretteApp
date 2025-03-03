@@ -68,8 +68,7 @@ class BodyScene: SKScene {
             let node = SKShapeNode(circleOfRadius: CGFloat(size))
             node.position = position
             node.name = name
-            node.fillColor = .red
-            node.alpha = 0.5
+            node.fillColor = .clear
             node.strokeColor = .clear
             
             let dot = Dot()
@@ -104,15 +103,11 @@ class BodyScene: SKScene {
                 face.size = CGSize(width: 40, height: 40)
                 
                 if !isZoomedIn {
-                    face.texture = SKTexture(image: UIImage(systemName: "face.smiling.inverse")!)
-                    
+                    face.changeImage(to: "face.smiling.inverse")
                     zoomIn(background, CGPoint(x: size.width / 2 - 190, y: size.height - 255))
-                    
-                    isZoomedIn = true
                 } else {
-                    face.texture = SKTexture(image: UIImage(systemName: "face.smiling")!)
+                    face.changeImage(to: "face.smiling")
                     zoomOut(background)
-                    isZoomedIn = false
                 }
                 face.run(pulse)
             } else if bodyNames.contains(node.name ?? "") || faceNames.contains(node.name ?? "") {
@@ -147,6 +142,7 @@ class BodyScene: SKScene {
                 node.isHidden = false
             }
         }
+        isZoomedIn = true
     }
     
     func zoomOut(_ node: SKSpriteNode) {
@@ -165,5 +161,6 @@ class BodyScene: SKScene {
                 node.isHidden = true
             }
         }
+        isZoomedIn = false
     }
 }

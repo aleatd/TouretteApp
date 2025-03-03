@@ -61,3 +61,5 @@ fastlane/test_output
 *.pbxproj
 
 .DS_Store
+.DS_Store
+*.pbxproj

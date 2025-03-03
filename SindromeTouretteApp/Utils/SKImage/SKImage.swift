@@ -12,6 +12,10 @@ class SKImage: SKSpriteNode {
         }
     }
     
+    func changeImage(to img: String) {
+        texture = SKTexture(image: UIImage(systemName: img) ?? UIImage(systemName: "face.smiling")!)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
