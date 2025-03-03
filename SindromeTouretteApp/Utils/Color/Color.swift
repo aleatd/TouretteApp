@@ -2,7 +2,7 @@ import SpriteKit
 
 extension SKColor {
     func interpolateTo(color: SKColor, fraction: CGFloat) -> SKColor {
-        let fraction = min(max(fraction, 0), 1) // Clamp fraction between 0 and 1
+        let fraction = min(max(fraction, 0), 1)
         
         let firstColor = CIColor(color: self)
         let secondColor = CIColor(color: color)

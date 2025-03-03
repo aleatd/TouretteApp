@@ -3,9 +3,9 @@ import Combine
 
 struct DatePrettier {
     static func format() -> String {
-        var date = NSDate()
+        let date = NSDate()
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         
         return formatter.string(from: date as Date)
@@ -14,9 +14,9 @@ struct DatePrettier {
 
 struct HourPrettier {
     static func format() -> String {
-        var date = NSDate()
+        let date = NSDate()
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         
         return formatter.string(from: date as Date)

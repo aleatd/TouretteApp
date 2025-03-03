@@ -6,13 +6,16 @@ struct DataView: View {
     let calendar = Calendar.current
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM" // Format: "02 Mar"
+        formatter.dateFormat = "dd/MM/yyyy"
         return formatter
-    }()
+    } ()
     
-    var weekDates: [Date] {
+    var dates: [Date] {
         let today = Date()
-        return (0..<30).compactMap { calendar.date(byAdding: .day, value: $0, to: today) }
+        
+        return (0...1825).compactMap {
+            calendar.date(byAdding: .day, value: -$0, to: today)
+        }
     }
     
     var body: some View {
@@ -23,7 +26,7 @@ struct DataView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
-                    ForEach(weekDates, id: \.self) { date in
+                    ForEach(dates, id: \.self) { date in
                         Button(action: {
                             selectedDate = date
                         }) {
@@ -42,3 +45,4 @@ struct DataView: View {
         }
     }
 }
+
