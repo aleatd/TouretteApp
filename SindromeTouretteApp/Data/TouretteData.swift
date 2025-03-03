@@ -24,3 +24,18 @@ class TouretteData: Identifiable {
         self.bodyParts = bodyParts
     }
 }
+
+struct Example {
+    var array : [TouretteData]
+    
+    init(array: [TouretteData]) {
+        self.array = array
+    }
+    
+    
+    func filter() {
+        var query = array.filter { $0.bodyParts == "Head" }
+
+        if (query.isEmpty) {} else {}
+    }
+}

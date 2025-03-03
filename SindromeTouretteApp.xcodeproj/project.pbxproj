@@ -190,6 +190,9 @@
 			);
 			mainGroup = 3BCD54372D6C6C1100A19E12;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3B0C1F832D75F5C700AC7D09 /* XCLocalSwiftPackageReference "../FRHorizontalCalendar" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3BCD54412D6C6C1100A19E12 /* Products */;
 			projectDirPath = "";
@@ -391,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SindromeTouretteApp/Preview Content\"";
-				DEVELOPMENT_TEAM = U6ZTHLCYUS;
+				DEVELOPMENT_TEAM = D4733GQ49X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SindromeTouretteApp/Info.plist;
@@ -405,7 +408,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.giantad;
+				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.aleatd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -425,7 +428,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SindromeTouretteApp/Preview Content\"";
-				DEVELOPMENT_TEAM = U6ZTHLCYUS;
+				DEVELOPMENT_TEAM = D4733GQ49X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SindromeTouretteApp/Info.plist;
@@ -439,7 +442,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.giantad;
+				PRODUCT_BUNDLE_IDENTIFIER = it.SindromeTourette.aleatd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -563,6 +566,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		3B0C1F832D75F5C700AC7D09 /* XCLocalSwiftPackageReference "../FRHorizontalCalendar" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../FRHorizontalCalendar;
+		};
+/* End XCLocalSwiftPackageReference section */
 	};
 	rootObject = 3BCD54382D6C6C1100A19E12 /* Project object */;
 }
