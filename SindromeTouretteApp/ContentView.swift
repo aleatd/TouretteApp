@@ -5,7 +5,7 @@ let backgroundColor = Color.sand.opacity(0.95)
 enum Tab: String, CaseIterable, Identifiable {
     case main
     case data
-    case settings
+    case profile
     
     var id: String {
         rawValue
@@ -15,7 +15,7 @@ enum Tab: String, CaseIterable, Identifiable {
         switch self {
         case .main: return "person"
         case .data: return "chart.pie"
-        case .settings: return "gearshape"
+        case .profile: return "gearshape"
         }
     }
     
@@ -23,7 +23,7 @@ enum Tab: String, CaseIterable, Identifiable {
         switch self {
         case .main: return "Main"
         case .data: return "Data"
-        case .settings: return "Settings"
+        case .profile: return "Settings"
         }
     }
 }
@@ -43,8 +43,8 @@ struct ContentView: View {
                         MainView()
                     case .data:
                         DataView()
-                    case .settings:
-                        SettingsView()
+                    case .profile:
+                        ProfileView()
                     }
                 }
             }
