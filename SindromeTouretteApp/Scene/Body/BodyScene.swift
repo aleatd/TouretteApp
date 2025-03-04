@@ -46,40 +46,46 @@ class BodyScene: SKScene {
         
         let parts = [
             ("Head", CGPoint(x: 0, y: 220), 96),
-            ("Shoulder", CGPoint(x: -80, y: 85), 36),
-            ("Shoulder", CGPoint(x: 80, y: 85), 36),
-            ("Arm", CGPoint(x: -100, y: 0), 56),
-            ("Arm", CGPoint(x: 100, y: 0), 56),
-            ("Hand", CGPoint(x: -130, y: -120), 36),
-            ("Hand", CGPoint(x: 130, y: -120), 36),
-            ("Leg", CGPoint(x: -50, y: -175), 48),
-            ("Leg", CGPoint(x: 50, y: -175), 48),
-            ("Foot", CGPoint(x: -50, y: -300), 48),
-            ("Foot", CGPoint(x: 50, y: -300), 48),
-            ("Eye", CGPoint(x: -45, y: 210), 12),
-            ("Eye", CGPoint(x: 45, y: 210), 12),
+            ("L-Shoulder", CGPoint(x: -80, y: 85), 36),
+            ("R-Shoulder", CGPoint(x: 80, y: 85), 36),
+            ("L-Arm", CGPoint(x: -100, y: -15), 56),
+            ("R-Arm", CGPoint(x: 100, y: -15), 56),
+            ("L-Hand", CGPoint(x: -135, y: -120), 36),
+            ("R-Hand", CGPoint(x: 135, y: -120), 36),
+            ("L-Leg", CGPoint(x: -50, y: -175), 48),
+            ("R-Leg", CGPoint(x: 50, y: -175), 48),
+            ("L-Foot", CGPoint(x: -50, y: -300), 48),
+            ("R-Foot", CGPoint(x: 50, y: -300), 48),
+            ("L-Eye", CGPoint(x: -45, y: 210), 12),
+            ("R-Eye", CGPoint(x: 45, y: 210), 12),
             ("Nose", CGPoint(x: 0, y: 195), 24),
             ("Mouth", CGPoint(x: 0, y: 165), 24)
         ]
         
         for (name, position, size) in parts {
-            let node = SKShapeNode(circleOfRadius: CGFloat(size))
+            let node = SKShapeNode(rectOf: CGSize(width: CGFloat(size)*2, height: CGFloat(size)*2))
             node.position = position
             node.name = name
             node.fillColor = .clear
-
-            node.alpha = 0.5
+            node.lineWidth = 5.0
+            node.alpha = 0.7
 
             node.strokeColor = .clear
             
             let dot = Dot()
             dot.name = "dot"
             node.addChild(dot)
-           
             
+            let ring = SKShapeNode(circleOfRadius: CGFloat(size))
+            ring.position = position
+            ring.name = name + "-ring"
+            ring.fillColor = .clear
+            ring.lineWidth = 5.0
+            ring.strokeColor = .greenVariant
+            ring.alpha = 0
+            background.addChild(ring)
             
-            
-            if (faceNames.contains(node.name ?? "")) {
+            if (faceNames.contains(strip(node.name!))) {
                 node.isHidden = true
             }
             
@@ -104,6 +110,9 @@ class BodyScene: SKScene {
         }
         
         for node in nodes(at: location) {
+            
+            let strippedName = strip(node.name ?? "")
+            
             if node.name == "glass" {
                 let pulse = SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.1), SKAction.scale(to: 1, duration: 0.1)])
                 
@@ -119,21 +128,18 @@ class BodyScene: SKScene {
                     zoomOut(background)
                 }
                 face.run(pulse)
-            } else if bodyNames.contains(node.name ?? "") || faceNames.contains(node.name ?? "") {
-                let name = node.name!
+                
+            } else if bodyNames.contains(strippedName) || faceNames.contains(strippedName) {
                 
                 if let dot = node.childNode(withName: "dot") as? Dot {
                     dot.activate()
-                    partName?.wrappedValue = name
                     isPartSelected?.wrappedValue = true
+                    partName?.wrappedValue = strippedName
                 
                 }
-                
-                
-            
-                pulsate(node: node as! SKShapeNode)
-                
-                
+                if let ring = background.childNode(withName: node.name! + "-ring") as? SKShapeNode {
+                    pulsate(node: ring)
+                }
             }
         }
     }
@@ -151,11 +157,11 @@ class BodyScene: SKScene {
         node.run(group)
         
         for node in background.children {
-            if bodyNames.contains(node.name ?? "") {
+            if bodyNames.contains(strip(node.name!)) {
                 node.isHidden = true
             }
             
-            if (faceNames.contains(node.name ?? "")) {
+            if (faceNames.contains(strip(node.name!))) {
                 node.isHidden = false
             }
         }
@@ -163,36 +169,22 @@ class BodyScene: SKScene {
     }
     
     func pulsate(node: SKShapeNode) {
-        let originalColor = node.strokeColor
-        let originalAlpha = node.alpha
-        let originalWidth = node.lineWidth
         
-        let colorChange = SKAction.run {
-            node.strokeColor = .greenVariant
-            node.lineWidth = 5.0
-        }
+        node.removeAllActions()
         
         let pulsateUp = SKAction.group([
-            SKAction.scale(to: 1.2, duration: 0.5),
-            SKAction.fadeAlpha(to: 0.5, duration: 0.5),
+            SKAction.scale(to: 1.4, duration: 0.5),
+            SKAction.fadeAlpha(to: 0.8, duration: 0.5),
         ])
         
         let pulsateDown = SKAction.group([
-            SKAction.scale(to: 1.0, duration: 0.5),
-            SKAction.fadeAlpha(to: 0.3, duration: 0.5)
+            SKAction.scale(to: 1, duration: 0.5),
+            SKAction.fadeAlpha(to: 0, duration: 0.5)
         ])
         
         let pulsate = SKAction.sequence([pulsateUp,pulsateDown])
         
-        let colorReset = SKAction.run {
-            node.strokeColor = originalColor
-            node.alpha = originalAlpha
-            node.lineWidth = originalWidth
-        }
-        
-        let finalSequence = SKAction.sequence([colorChange,pulsate,colorReset])
-        
-        node.run(finalSequence)
+        node.run(pulsate)
     }
     
     
@@ -204,14 +196,22 @@ class BodyScene: SKScene {
         node.run(group)
         
         for node in background.children {
-            if bodyNames.contains(node.name ?? "") {
+            if bodyNames.contains(strip(node.name!)) {
                 node.isHidden = false
             }
             
-            if (faceNames.contains(node.name ?? "")) {
+            if (faceNames.contains(strip(node.name!))) {
                 node.isHidden = true
             }
         }
         isZoomedIn = false
+    }
+    
+    func strip(_ name: String) -> String {
+        if name.starts(with: "L-") == true || name.starts(with: "R-") == true {
+            return String(name.dropFirst(2))
+        } else {
+            return name
+        }
     }
 }
