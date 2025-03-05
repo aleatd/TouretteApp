@@ -1,29 +1,22 @@
 import Foundation
 
-
-enum typeExercise {
-    case hrt
-    case erp
-}
-
 class TouretteData: Identifiable {
     var id: UUID = UUID()
-    var type : typeExercise
+    var realDate: Date
     var date: String
     var hour: String
-    var isManage, totalManaged: Int
+    var managedTics, notManagedTics: Int
     var duration: TimeInterval
-    var bodyParts: String
+    var exercise: ExerciseData
     
-
-    init(type: typeExercise, duration: TimeInterval, bodyParts: String) {
-
-        self.type = type
+    
+    init(date: Date, duration: TimeInterval, managedTics: Int, notManagedTics: Int, exercise: ExerciseData) {
+        self.realDate = date
         self.date = DatePrettier.format()
         self.hour = HourPrettier.format()
-        self.isManage = 0
-        self.totalManaged = 0
+        self.managedTics = managedTics
+        self.notManagedTics = notManagedTics
         self.duration = duration
-        self.bodyParts = bodyParts
+        self.exercise = ExerciseData(bodyPart: "", exercise: "", titleExercise: "")
     }
 }
