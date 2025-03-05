@@ -1,5 +1,6 @@
 import Foundation
 
+
 enum typeExercise {
     case hrt
     case erp
@@ -14,7 +15,9 @@ class TouretteData: Identifiable {
     var duration: TimeInterval
     var bodyParts: String
     
+
     init(type: typeExercise, duration: TimeInterval, bodyParts: String) {
+
         self.type = type
         self.date = DatePrettier.format()
         self.hour = HourPrettier.format()
