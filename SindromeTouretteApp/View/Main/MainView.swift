@@ -7,7 +7,6 @@ struct MainView : View {
     @State var navigateToExerciseView: Bool = false
     @State var isPartSelected : Bool = false
     
-    @State var isActive: Bool = false
     
     var scene: SKScene {
         let scene = BodyScene(size: CGSize(width: 360, height: 720))
@@ -20,49 +19,51 @@ struct MainView : View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                HStack {
-                    Text("Selected Part: \(partName)")
-                        .padding()
-                        .foregroundColor(.black)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .frame(width: 240, height: 50)
-                        .background(
-                            Rectangle()
-                                .stroke(.greenVariant, lineWidth: 3)
-                                .cornerRadius(3)
-                        )
-                    
-                    
-                    if isPartSelected {
-                        Button("Confirm") {
-                            isActive = true
+                    HStack {
+                        Text("Selected Part: \(partName)")
+                            .padding()
+                            .foregroundColor(.black)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 240, height: 50)
+                            .background(
+                                Rectangle()
+                                    .stroke(.greenVariant, lineWidth: 3)
+                                    .cornerRadius(3)
+                            )
+                            
+                        
+                        if isPartSelected {
+                            Button("Confirm") {
+                                navigateToExerciseView = true
+                            }
+                            .padding()
+                            .background(
+                                Color.greenVariant
+                                    .cornerRadius(5)
+                            )
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(width: 100, height: 50)
+                            .foregroundColor(.white)
                         }
-                        .padding()
-                        .background(
-                            Color.greenVariant
-                                .cornerRadius(5)
-                        )
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: 100, height: 50)
-                        .foregroundColor(.white)
                     }
+                    
+                    SpriteView(scene: scene)
+                    
+                
+                   
                 }
-                
-                SpriteView(scene: scene)
-                
-                NavigationLink(destination: ExerciseView(bodyPart: partName), isActive: $isActive) {
-                    EmptyView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("Sand"))
+                .navigationDestination(isPresented: $navigateToExerciseView) {
+                    ExerciseView(bodyPart: partName)
                 }
-                
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Sand"))
+                .tint(.red)
         }
-        
+
         
     }
 }
