@@ -4,8 +4,8 @@ class Dot: SKShapeNode {
     let colorSequence: SKAction
     
     override init() {
-        let firstColorTransitionAction = SKColor.createColorTransitionAction(duration: 1.2, fromColor: .yellow, toColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1))
-        let secondColorTransitionAction = SKColor.createColorTransitionAction(duration: 1.2, fromColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1), toColor: .yellow)
+        let firstColorTransitionAction = createColorTransitionAction(duration: 1.2, fromColor: .yellow, toColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1))
+        let secondColorTransitionAction = createColorTransitionAction(duration: 1.2, fromColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1), toColor: .yellow)
         colorSequence = SKAction.repeatForever(SKAction.sequence([firstColorTransitionAction, secondColorTransitionAction]))
         
         super.init()
@@ -28,9 +28,9 @@ class Dot: SKShapeNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        let firstColorTransitionAction = SKColor.createColorTransitionAction(duration: 1.2, fromColor: .yellow, toColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1))
-        let secondColorTransitionAction = SKColor.createColorTransitionAction(duration: 1.2, fromColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1), toColor: .yellow)
-        colorSequence = SKAction.repeatForever(SKAction.sequence([firstColorTransitionAction, secondColorTransitionAction]))
+        let colorTransitionAction1 = createColorTransitionAction(duration: 1.2, fromColor: .yellow, toColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1))
+        let colorTransitionAction2 = createColorTransitionAction(duration: 1.2, fromColor: UIColor(red: 0.58, green: 0.47451, blue: 0, alpha: 1), toColor: .yellow)
+        colorSequence = SKAction.repeatForever(SKAction.sequence([colorTransitionAction1, colorTransitionAction2]))
         super.init(coder: aDecoder)
     }
 }

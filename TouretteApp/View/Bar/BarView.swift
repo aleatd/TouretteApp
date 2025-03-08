@@ -28,7 +28,7 @@ fileprivate struct LayoutView: View {
     var body: some View {
         HStack(spacing: 40) {
             ForEach(Tab.allCases) { tab in
-                TabButton(selectedTab: $selectedTab, tab: tab, namespace: namespace)
+                TabButton(tab: tab, selectedTab: $selectedTab, namespace: namespace)
             }
         }
         .padding(.horizontal, 20)
@@ -36,17 +36,13 @@ fileprivate struct LayoutView: View {
 }
 
 fileprivate struct TabButton: View {
-    @Binding var selectedTab: Tab
-
     let tab: Tab
+    @Binding var selectedTab: Tab
     var namespace: Namespace.ID
     
     var body: some View {
         Button(action: {
-            /*withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 1)) {
-                selectedTab = tab
-            }*/
-            withAnimation(.linear(duration: 0.25)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 1)) {
                 selectedTab = tab
             }
         }) {
