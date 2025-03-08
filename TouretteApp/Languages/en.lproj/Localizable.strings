@@ -1,0 +1,97 @@
+/* Body parts */
+"Head" = "Head";
+"Eye" = "Eye";
+"Nose" = "Nose";
+"Hand" = "Hand";
+"Leg" = "Leg";
+"Mouth" = "Mouth";
+"Arm" = "Arm";
+"Shoulder" = "Shoulder";
+"Foot" = "Foot";
+
+/* Exercises name */
+"NeckEx" = "Neck Exercise";
+"TenseNeck" = "Tense Neck";
+"Posture" = "Correct Posture";
+"EyeEx" = "Eye Exercise";
+"BrowCont" = "Eyebrow Contraction";
+"NasalBreath" = "Nasal Breathing";
+"NoseTense" = "Nose Tension";
+"HandEx" = "Hand Exercise";
+"TightFists" = "Tight Fists";
+"HandPush" = "Hand Push";
+"HandClasp" = "Hand Clasp";
+"LegEx" = "Leg Exercise";
+"TightKnees" = "Tight Knees";
+"HeelsWeight" = "Weight on Heels";
+"MouthEx" = "Mouth Exercise";
+"JawClench" = "Jaw Clenching";
+"LipClose" = "Lip Closure";
+"InterlacedArms" = "Interlaced Arms";
+"ThighPush" = "Thigh Push";
+"LowShoulders" = "Lowered Shoulders";
+"CrossFeet" = "Crossed Feet Position";
+"ToeLift" = "Toe Lift";
+
+/* Exercises description */
+"TenseNeckDesc" = "Tense your neck while lowering your shoulders.";
+"ChooseExercise" = "Choose your Exercise!";
+"ChinChest" = "Keep your neck tense in position, push your chin toward your chest, and breathe deeply.";
+"GoodPosture" = "Maintain good posture (sit upright), look straight ahead, and pull your neck and head back.";
+"FocusBlink" = "Focus on a point in the room and blink your eyelids in a controlled manner.";
+"BrowBreathe" = "Contract your eyebrows and use controlled breathing.";
+"InhaleExhale" = "Inhale and exhale through your mouth while tensing your nose and eyebrows.";
+"PullNose" = "Slightly pull your nose downward, keep your lips pressed together, and breathe deeply.";
+"HandsLegs" = "Place your hands on your legs, pressing if necessary.";
+"FistsPress" = "Clench your fists, bring your hands together, and press the palms against your hips or thighs.";
+"PushObject" = "Push your hand against an object, contracting the muscles opposite to the tic movement.";
+"HandsStomach" = "Bring your hands together in front of your stomach and press.";
+"HeelsFloor" = "Press your heels against the floor.";
+"KneesTogether" = "Press your knees tightly together.";
+"StandHeels" = "Stand with your weight on your heels and your knees locked.";
+"LipsTeeth" = "Clench your lips, bring your teeth together, and press your tongue against the roof of your mouth.";
+"JawLips" = "Gently clench your jaw and press your lips together.";
+"CloseTeeth" = "Close your lips and gently press your teeth together.";
+"FingersArms" = "Interlace your fingers, push your shoulders down, and push your arms against your sides.";
+"ElbowsHips" = "Push your hands on your thighs and bring your elbows toward your hips.";
+"ShouldersDown" = "Lower your shoulders and push your arms against your sides.";
+"BendKnees" = "Bend your knees, bring your feet closer to you, press the soles of your feet on the floor, and cross the other foot behind your ankle.";
+"SoleToes" = "Press the sole of your foot on the floor, spread your toes, and lift them upward.";
+
+"SelectedPart" = "Selected Part: ";
+"Confirm" = "Confirm";
+
+"SelectedDate" = "Selected Date: ";
+
+"Settings" = "Settings";
+"Profile" = "Profile";
+"SelectYourName" = "Select your name!";
+"Edit" = "Edit";
+"Done" = "Done";
+"Language" = "Language";
+"AccessibilitySettings" = "Accessibility Settings";
+"Interactions" = "Interactions";
+"ThemeLight" = "Light mode";
+"ThemeDark" = "Dark mode";
+"ColorBlindness" = "Color Blindness";
+
+"None" = "None";
+"Buttons" = "Buttons";
+"Swipe" = "Swipe";
+"Vocal" = "Vocal";
+"Buttons/Vocal" = "Buttons/Vocal";
+"Swipe/Vocal" = "Swipe/Vocal";
+
+"Protanopia" = "Protanopia";
+"Deuteranopia" = "Deuteranopia";
+"Tritanopia" = "Tritanopia";
+"Monochromacy" = "Monochromacy";
+
+/* Meditation phrases */
+"FirstMedText" = "Concentrate on your ";
+"SecondMedText" = "Focus on your breath";
+"ThirdMedText" = "Stay present";
+"FourthMedText" = "Breathe deeply";
+"MeditationSuccess" = "Good Job!";
+"MeditationRating" = "Rate your trigger";
+"MeditationContinue" = "Go to exercises";

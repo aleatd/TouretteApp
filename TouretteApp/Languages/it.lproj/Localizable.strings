@@ -1,0 +1,93 @@
+"Head" = "Testa";
+"Eye" = "Occhio";
+"Nose" = "Naso";
+"Hand" = "Mano";
+"Leg" = "Gamba";
+"Mouth" = "Bocca";
+"Arm" = "Braccio";
+"Shoulder" = "Spalla";
+"Foot" = "Piede";
+
+"NeckEx" = "Esercizio per il collo";
+"TenseNeck" = "Collo teso";
+"Posture" = "Postura corretta";
+"EyeEx" = "Esercizio per gli occhi";
+"BrowCont" = "Contrazione delle sopracciglia";
+"NasalBreath" = "Respirazione nasale";
+"NoseTense" = "Tensione del naso";
+"HandEx" = "Esercizio per le mani";
+"TightFists" = "Pugni stretti";
+"HandPush" = "Spinta della mano";
+"HandClasp" = "Mani intrecciate";
+"LegEx" = "Esercizio per le gambe";
+"TightKnees" = "Ginocchia strette";
+"HeelsWeight" = "Peso sui talloni";
+"MouthEx" = "Esercizio per la bocca";
+"JawClench" = "Serraggio della mascella";
+"LipClose" = "Chiusura delle labbra";
+"InterlacedArms" = "Braccia intrecciate";
+"ThighPush" = "Spinta sulle cosce";
+"LowShoulders" = "Spalle abbassate";
+"CrossFeet" = "Posizione piedi incrociati";
+"ToeLift" = "Sollevamento delle dita dei piedi";
+
+"TenseNeckDesc" = "Tendi il collo mentre abbassi le spalle.";
+"ChooseExercise" = "Scegli il tuo esercizio!";
+"ChinChest" = "Mantieni il collo teso in posizione, spingi il mento verso il petto e respira profondamente.";
+"GoodPosture" = "Mantieni una buona postura (siediti dritto), guarda avanti e tira indietro il collo e la testa.";
+"FocusBlink" = "Focalizzati su un punto nella stanza e sbatti le palpebre in modo controllato.";
+"BrowBreathe" = "Contrai le sopracciglia e usa una respirazione controllata.";
+"InhaleExhale" = "Inspira ed espira attraverso la bocca mentre tendi il naso e le sopracciglia.";
+"PullNose" = "Tira leggermente il naso verso il basso, tieni le labbra premute insieme e respira profondamente.";
+"HandsLegs" = "Metti le mani sulle gambe, premendo se necessario.";
+"FistsPress" = "Stringi i pugni, unisci le mani e premi i palmi contro i fianchi o le cosce.";
+"PushObject" = "Spingi la mano contro un oggetto, contraendo i muscoli opposti al movimento del tic.";
+"HandsStomach" = "Unisci le mani davanti allo stomaco e premi.";
+"HeelsFloor" = "Premi i talloni contro il pavimento.";
+"KneesTogether" = "Premi forte le ginocchia l'una contro l'altra.";
+"StandHeels" = "Stai in piedi con il peso sui talloni e le ginocchia bloccate.";
+"LipsTeeth" = "Stringi le labbra, unisci i denti e premi la lingua contro il palato.";
+"JawLips" = "Serrando delicatamente la mascella, premi le labbra insieme.";
+"CloseTeeth" = "Chiudi le labbra e premi delicatamente i denti insieme.";
+"FingersArms" = "Intreccia le dita, abbassa le spalle e spingi le braccia contro i fianchi.";
+"ElbowsHips" = "Spingi le mani sulle cosce e porta i gomiti verso i fianchi.";
+"ShouldersDown" = "Abbassa le spalle e spingi le braccia contro i fianchi.";
+"BendKnees" = "Piega le ginocchia, avvicina i piedi a te, premi le piante dei piedi sul pavimento e incrocia l'altro piede dietro la caviglia.";
+"SoleToes" = "Premi la pianta del piede sul pavimento, allarga le dita e sollevale verso l'alto.";
+
+"SelectedPart" = "Parte selezionata: ";
+"Confirm" = "Conferma";
+
+"SelectedDate" = "Data selezionata: ";
+
+"Settings" = "Impostazioni";
+"Profile" = "Profilo";
+"SelectYourName" = "Seleziona il tuo nome!";
+"Edit" = "Modifica";
+"Done" = "Fatto";
+"Language" = "Lingua";
+"AccessibilitySettings" = "Impostazioni di accessibilità";
+"Interactions" = "Interazioni";
+"ThemeLight" = "Modalità chiara";
+"ThemeDark" = "Modalità scura";
+"ColorBlindness" = "Daltonismo";
+
+"None" = "Nessuno";
+"Buttons" = "Pulsanti";
+"Swipe" = "Scorrimento";
+"Vocal" = "Vocale";
+"Buttons/Vocal" = "Pulsanti/Vocale";
+"Swipe/Vocal" = "Scorrimento/Vocale";
+
+"Protanopia" = "Protanopia";
+"Deuteranopia" = "Deuteranopia";
+"Tritanopia" = "Tritanopia";
+"Monochromacy" = "Monocromia";
+
+"FirstMedText" = "Concentrati sul tuo ";
+"SecondMedText" = "Concentrati sul tuo respiro";
+"ThirdMedText" = "Sii presente";
+"FourthMedText" = "Respira profondamente";
+"MeditationSuccess" = "Ottimo Lavoro!";
+"MeditationRating" = "Indica il valore di intensità del tuo trigger";
+"MeditationContinue" = "Vai all'esercizio";
