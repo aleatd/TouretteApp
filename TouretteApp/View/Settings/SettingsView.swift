@@ -105,7 +105,7 @@ struct SettingsView: View {
                                     Text(NSLocalizedString("Interactions", comment: ""))
                                         .foregroundColor(.brown)
                                     Spacer()
-                                    Text(interaction)
+                                    Text(NSLocalizedString(interaction, comment: ""))
                                         .foregroundColor(.gray)
                                 }
                                 .padding()
@@ -113,7 +113,8 @@ struct SettingsView: View {
                                 .cornerRadius(8)
                                 .frame(maxWidth: .infinity)
                             }
-                            .padding(.bottom)
+                            .menuStyle(BorderlessButtonMenuStyle())
+                            .padding(.top, -25)
                             
                             Menu {
                                 ForEach(ColorBlindnessType.allCases) { type in
@@ -134,6 +135,7 @@ struct SettingsView: View {
                                 .cornerRadius(8)
                                 .frame(maxWidth: .infinity)
                             }
+                            .menuStyle(BorderlessButtonMenuStyle())
                             .padding(.top, 10)
                         }
                         .listRowBackground(Color.sand)
@@ -141,7 +143,7 @@ struct SettingsView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.sand)
             }
-            .navigationBarTitle("Settings")
+            .navigationBarTitle(NSLocalizedString("Settings", comment: ""))
             .onAppear {
                 language = Locale.current.language.languageCode?.identifier == "it" ? "Italiano" : "English"
             }

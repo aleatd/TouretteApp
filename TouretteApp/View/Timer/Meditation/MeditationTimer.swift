@@ -2,116 +2,163 @@ import SwiftUI
 import Combine
 
 struct MeditationTimer: View {
-    @State private var currentTextIndex = 0
-    @State private var showText = true
-    @State private var scale: CGFloat = 1.0
-    @State private var timeRemaining = 0
-    @State private var timerSubscription: Cancellable?
-    @State private var hasStopped = false
+    
+    // Comforting texts variables
     @State private var offsetY: CGFloat = 0
     @State private var meditationTextTimer: Timer?
-    @State private var selectedBodyPart: String?
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .common)
-    let partName: String
-    
-    init(partName: String) {
-        self.partName = partName
-    }
-    
-    let meditationTexts: [String] = [
-        NSLocalizedString("FirstMedText", comment: "Meditation Reinforcement Text"),
-        NSLocalizedString("SecondMedText", comment: "Meditation Reinforcement Text"),
-        NSLocalizedString("ThirdMedText", comment: "Meditation Reinforcement Text"),
-        NSLocalizedString("FourthMedText", comment: "Meditation Reinforcement Text")
-    ]
-    
+    @State private var currentTextIndex = 0
+    @State private var showText = true
+    @State private var scaleM: CGFloat = 1.0
+    let meditationTexts: [String] = ["Concentrate on your ", "Focus on your breath", "Stay present", "Think of your trigger"]
     
     private var currentMeditationText: String {
         if currentTextIndex == 0 {
-            return meditationTexts[currentTextIndex] + (partName.lowercased())
+            return meditationTexts[currentTextIndex] + (exercise.bodyPart.lowercased())
         } else {
             return meditationTexts[currentTextIndex]
         }
     }
     
+    // Timer variables
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common)
+    @State private var timerSubscription: Cancellable?
+    @State private var timeRemaining = 0
+    @State private var hasStopped = false
+    
+    // Navigation variable
+    @Binding var navigationPath : [String]
+    @State private var navigateToNextView: Bool = false
+    
+    // Countdown variables
+    @State private var countdownNumber = 3
+    @State private var showNextNumber: Bool = true
+    
+    // Selecting exercises variables
+    @State private var selectedExercise: Exercises?
+    let exercise: Exercises
+    
+    init(exercise: Exercises, navigationPath: Binding<[String]>) {
+        self.exercise = exercise
+        self._navigationPath = navigationPath
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                if meditationTextTimer != nil {
-                    Text(currentMeditationText)
-                        .font(.largeTitle)
-                        .offset(y: offsetY)
-                        .opacity(showText ? 1 : 0)
-                        .animation(.easeIn(duration: 1), value: offsetY)
-                } else {
-                    Text(NSLocalizedString("MeditationSuccess", comment: "Meditation Success Text"))
-                        .font(.largeTitle)
-                        .offset(y: 100)
+                
+                
+                if countdownNumber > 0 {
+                    Text("\(countdownNumber)")
+                        .font(.system(size: 100))
+                        .fontWeight(.bold)
                         .multilineTextAlignment(.center)
-                        .scaleEffect(scale)
-                        .onAppear {
-                            scale = 1.0
-                            withAnimation(
-                                Animation.easeInOut(duration: 0.8)
-                                    .repeatForever(autoreverses: true)
-                            ) {
-                                scale = 1.2
+                        .offset(y: 50)
+                        .opacity(showNextNumber ? 1 : 0.5)
+                        .animation(.easeInOut(duration: 0.8), value: showNextNumber)
+                } else {
+                    if !hasStopped {
+                        Text(currentMeditationText)
+                            .font(.title)
+                            .offset(y: offsetY)
+                            .opacity(showText ? 1 : 0)
+                            .onAppear() {
+                                startMeditationTimer()
                             }
-                        }
+                            .animation(.easeInOut(duration: 1), value: offsetY)
+                        
+                    } else {
+                        Text("Good Job!")
+                            .font(.title)
+                            .offset(y: 80)
+                            .multilineTextAlignment(.center)
+                            .scaleEffect(scaleM)
+                            .onAppear {
+                                withAnimation(
+                                    Animation.easeInOut(duration: 0.8)
+                                        .repeatForever(autoreverses: true)
+                                ) {
+                                    scaleM = 1.2
+                                }
+                            }
+                    }
                 }
                 
-                if !hasStopped {
+                Spacer()
+                
+                
+                if countdownNumber <= 0 {
+                    Button(hasStopped ? "Go to the exercise" : "Stop") {
+                        if !hasStopped {
+                            timerSubscription?.cancel()
+                            meditationTextTimer?.invalidate()
+                            hasStopped = true
+                        } else {
+                            navigationPath.append("habitreversaltraining")
+                            selectedExercise = exercise
+                            navigateToNextView.toggle()
+                        }
+                    }
+                    .frame(width: geometry.size.width * 0.9, height: 80)
+                    .background(
+                        Rectangle().fill(hasStopped ? .greenVariant : .red)
+                            .cornerRadius(10)
+                    )
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding(.bottom, geometry.size.height * 0.2)
+                }
+            }
+            .offset(y: geometry.size.height * 0.1)
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            
+            
+            VStack {
+                Spacer().frame(height: geometry.size.height * 0.4)
+                
+                ZStack {
                     Text(timeString(from: timeRemaining))
                         .font(.system(size: 100))
                         .padding()
                         .background(
-                            Rectangle().fill(Color.greenVariant).cornerRadius(10)
+                            Rectangle().fill(Color.emerald).cornerRadius(10)
                                 .frame(width: 350, height: 150)
                         )
                         .foregroundColor(.white)
-                        .padding(.top, 180)
-                        .onAppear {
-                            timeRemaining = 0
-                            timerSubscription = timer.connect()
-                            showComfortingTexts()
-                        }
                         .onReceive(timer) { _ in
                             timeRemaining += 1
                         }
-                } else {
-                    VStack {
-                        Text(NSLocalizedString("MeditationRating", comment: "Meditation Rating Text"))
-                            .font(.largeTitle)
-                            .frame(width: 350, height: 150)
-                            .padding(.top, 180)
-                    }
                 }
                 
-                Spacer(minLength: geometry.size.height * 0.02)
-                
-                Button(hasStopped ? NSLocalizedString("MeditationContinue", comment: "Meditation Continuing Text") : "Stop") {
-                    if !hasStopped {
-                        timerSubscription?.cancel()
-                        meditationTextTimer?.invalidate()
-                        meditationTextTimer = nil
-                        hasStopped = true
-                    } else {
-                        selectedBodyPart = partName
-                    }
-                }
-                .frame(width: geometry.size.width * 0.8, height: 50)
-                .background(Rectangle().fill(hasStopped ? .greenVariant : .red).cornerRadius(10))
-                .font(.title)
-                .foregroundColor(.white)
-                .padding(.bottom, geometry.size.height * 0.08)
-                
+                .frame(width: geometry.size.width, height: 150)
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
+        }
+        .onAppear() {
+            showCountdownText()
         }
         .background(.sand)
-        .navigationDestination(item: $selectedBodyPart) { bodyPart in
-            ExerciseView(bodyPart: bodyPart)
+        .navigationBarBackButtonHidden(!hasStopped)
+        .navigationDestination(isPresented: $navigateToNextView) {
+            HabitReversalTrainingTimer(exercise: exercise, navigationPath: $navigationPath)
+        }
+    }
+    
+    private func startMeditationTimer() {
+        timeRemaining = 0
+        timerSubscription = timer.connect()
+        showComfortingTexts()
+    }
+    
+    private func showCountdownText() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            withAnimation(.easeInOut(duration: 0.8)) {
+                showNextNumber = false
+                countdownNumber -= 1
+                showNextNumber = true
+            }
+            
+            if countdownNumber <= 0 {
+                timer.invalidate()
+            }
         }
     }
     
@@ -123,6 +170,7 @@ struct MeditationTimer: View {
     
     private func showComfortingTexts() {
         meditationTextTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+            
             withAnimation {
                 showText = false
                 currentTextIndex = (currentTextIndex + 1) % meditationTexts.count
@@ -132,6 +180,7 @@ struct MeditationTimer: View {
                     offsetY = 0
                 }
             }
+            
         }
     }
 }

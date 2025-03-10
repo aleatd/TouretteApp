@@ -15,7 +15,6 @@ struct WelcomePageView: View {
                 .padding(.bottom, 8)
             
             Text(title)
-                .font(.custom("Helvetica", size: 18))
                 .fontWeight(.medium)
                 .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -29,7 +28,6 @@ struct WelcomePageView: View {
                 .padding(.top, 10)
             
             Text(description)
-                .font(.custom("Helvetica", size: 14))
                 .fontWeight(.regular)
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
